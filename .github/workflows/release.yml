@@ -66,6 +66,11 @@ on:
         type: boolean
         default: false
         required: false
+      docker_platforms:
+        description: "The platforms to publish as a comma-delimited string"
+        type: string
+        default: "linux/amd64,linux/arm64"
+        required: false
   workflow_call:
     inputs:
       sha:
@@ -197,6 +202,7 @@ jobs:
     with:
       version_number: ${{ inputs.version_number }}
       test_run: ${{ inputs.test_run }}
+      platforms: ${{ inputs.docker_platforms }}
 
   slack-notification:
     name: Slack Notification
